@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@3.5.3
+        uses: actions/checkout@v3.5.3
 
       - name: Set up Node.js
-        uses: actions/setup-node@3.7.0
+        uses: actions/setup-node@v3.7.0
 
       - name: Install dependencies
         run: npm i
