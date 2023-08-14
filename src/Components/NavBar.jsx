@@ -14,7 +14,7 @@ const logout = () => {
 const NavBar = () => {
 	return (
 		<>
-			<div className="flex items-center bg-OpenColor-gray-1 gap-4 px-8">
+			<div className="flex flex-wrap center justify-between items-center bg-OpenColor-gray-1 gap-4 px-8">
 				<Link className="btn" to="/D2-API-Testing-App/Home">
 					Home
 				</Link>
