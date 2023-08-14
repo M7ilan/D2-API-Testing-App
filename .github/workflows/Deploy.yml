@@ -1,0 +1,33 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
+  VITE_CLIENT_ID: ${{ secrets.VITE_CLIENT_ID }}
+  VITE_CLIENT_SECRET: ${{ secrets.VITE_CLIENT_SECRET }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.5.3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3.7.0
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Build
+        run: npm run build
+
+      - name: GitHub Pages action
+        uses: peaceiris/actions-gh-pages@v3.9.3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
