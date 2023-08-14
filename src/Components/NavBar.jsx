@@ -5,9 +5,9 @@ const logout = () => {
 		localStorage.removeItem("access_token");
 		localStorage.removeItem("refresh_token");
 		localStorage.setItem("isLoggedIn", false);
-		window.location.href = "/D2-API-Testing-App-Local/Login";
+		window.location.href = "/D2-API-Testing-App/Login";
 	} else {
-		window.location.href = "/D2-API-Testing-App-Local/Login";
+		window.location.href = "/D2-API-Testing-App/Login";
 	}
 };
 
@@ -15,7 +15,7 @@ const NavBar = () => {
 	return (
 		<>
 			<div className="flex items-center bg-OpenColor-gray-1 gap-4 px-8">
-				<Link className="btn" to="/D2-API-Testing-App-Local/Home">
+				<Link className="btn" to="/D2-API-Testing-App/Home">
 					Home
 				</Link>
 				{localStorage.getItem("isLoggedIn") == "true" ? (
@@ -23,7 +23,7 @@ const NavBar = () => {
 						Logout
 					</button>
 				) : (
-					<Link className="btn" to="/D2-API-Testing-App-Local/Login">
+					<Link className="btn" to="/D2-API-Testing-App/Login">
 						Login
 					</Link>
 				)}
