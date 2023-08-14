@@ -15,5 +15,9 @@ img {
 }
 
 .btn {
+  @apply bg-OpenColor-gray-2 hover:bg-OpenColor-gray-3 rounded-lg px-4 py-2 my-2;
+}
+
+.btn-hover {
   @apply hover:bg-OpenColor-gray-3 rounded-lg px-4 py-2 my-2;
 }

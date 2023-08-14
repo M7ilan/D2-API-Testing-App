@@ -15,15 +15,16 @@ const NavBar = () => {
 	return (
 		<>
 			<div className="flex flex-wrap center justify-between items-center bg-OpenColor-gray-1 gap-4 px-8">
-				<Link className="btn" to="/D2-API-Testing-App/Home">
+				<Link className="btn-hover" to="/D2-API-Testing-App/Home">
 					Home
 				</Link>
+				<Link className="font-bold text-4xl my-4 btn-hover" to="/D2-API-Testing-App">D2 API TESTING APP</Link>
 				{localStorage.getItem("isLoggedIn") == "true" ? (
-					<button className="btn" onClick={logout}>
+					<button className="btn-hover" onClick={logout}>
 						Logout
 					</button>
 				) : (
-					<Link className="btn" to="/D2-API-Testing-App/Login">
+					<Link className="btn-hover" to="/D2-API-Testing-App/Login">
 						Login
 					</Link>
 				)}
