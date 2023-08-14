@@ -1,6 +1,6 @@
 import { CLIENT_ID, CLIENT_SECRET, BUNIGE_API_ROOT_PATH } from "../config";
 
-export const GetAuthToken = async (_code, grantType = "authorization_code", refreshToken = null) => {
+export const GetTokens = async (_code, grantType = "authorization_code", refreshToken = null) => {
 	try {
 		const options = {
 			method: "POST",
