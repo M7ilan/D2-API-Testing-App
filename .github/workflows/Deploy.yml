@@ -6,9 +6,9 @@ on:
       - main
 
 env:
-  VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
-  VITE_CLIENT_ID: ${{ secrets.VITE_CLIENT_ID }}
-  VITE_CLIENT_SECRET: ${{ secrets.VITE_CLIENT_SECRET }}
+  VITE_LOCAL_API_KEY: ${{ secrets.VITE_LOCAL_API_KEY }}
+  VITE_LOCAL_CLIENT_ID: ${{ secrets.VITE_LOCAL_CLIENT_ID }}
+  VITE_LOCAL_CLIENT_SECRET: ${{ secrets.VITE_LOCAL_CLIENT_SECRET }}
 
 jobs:
   deploy:
