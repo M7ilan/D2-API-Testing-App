@@ -16,6 +16,7 @@ const Home = () => {
 					localStorage.setItem("refresh_token", response.refresh_token);
 					localStorage.setItem("isLoggedIn", true);
 					window.history.replaceState({}, document.title, "/");
+					window.location.reload();
 				}
 			})
 			.catch((error) => {
