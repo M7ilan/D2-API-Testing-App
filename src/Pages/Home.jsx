@@ -29,7 +29,7 @@ const Home = () => {
 			try {
 				const userInfo = await GetUserInfo(accessToken);
 
-				if (userInfo) {
+				if (userInfo.Response) {
 					setUserInfo(userInfo.Response);
 				}
 			} catch (error) {
