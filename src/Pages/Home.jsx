@@ -43,10 +43,10 @@ const Home = () => {
 
 	return (
 		<>
-			<div className="flex flex-col p-4 text-center gap-4">
-				<div className="text-4xl font-bold">Welcome {userInfo?.bungieNetUser.uniqueName}</div>
+			<div className="flex flex-col items-center text-center md:text-start md:items-start p-4 gap-4">
+				<div className="text-2xl md:text-4xl font-bold">Welcome {userInfo?.bungieNetUser.uniqueName}</div>
 				{userInfo && (
-					<div className="text-lg">
+					<div className="text-xs md:text-lg">
 						<p>Membership ID: {userInfo.destinyMemberships[0].membershipId}</p>
 						<p>Membership Type: {userInfo.destinyMemberships[0].membershipType}</p>
 						<p>Display Name: {userInfo.destinyMemberships[0].LastSeenDisplayName}</p>
