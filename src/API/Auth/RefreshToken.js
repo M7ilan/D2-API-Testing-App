@@ -1,4 +1,4 @@
-import { GetAuthToken } from "./GetAuthToken";
+import { GetTokens } from "./GetTokens";
 
 export const TOKEN_REFRESH_TIME = 30 * 60 * 1000;
 
@@ -24,7 +24,7 @@ export const checkAndRefreshToken = async () => {
 
 export const refreshAccessToken = async (refresh_token) => {
 	try {
-		const response = await GetAuthToken(null, "refresh_token", refresh_token);
+		const response = await GetTokens(null, "refresh_token", refresh_token);
 		return response;
 	} catch (error) {
 		throw error;
