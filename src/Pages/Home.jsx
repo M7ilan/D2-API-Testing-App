@@ -4,6 +4,7 @@ import { GetUserInfo } from "../API/Auth/GetUserInfo";
 
 const Home = () => {
 	const [userInfo, setUserInfo] = useState(null);
+	const isLoggedin = localStorage.getItem("isLoggedIn");
 
 	const urlParams = new URLSearchParams(window.location.search);
 	const code = urlParams.get("code");
@@ -36,20 +37,20 @@ const Home = () => {
 			}
 		};
 
-		if (localStorage.getItem("isLoggedIn") == "true") {
+		if (isLoggedin == "true") {
 			fetchUserInfo(localStorage.getItem("access_token"));
 		}
 	}, []);
 
 	return (
 		<>
-			<div className="flex flex-col items-center text-center md:text-start md:items-start p-4 gap-4">
+			<div className={`flex flex-col items-center text-center ${isLoggedin == "true" && "md:text-start md:items-start"} p-4 gap-4`}>
 				<div className="text-2xl md:text-4xl font-bold">Welcome {userInfo?.bungieNetUser.uniqueName}</div>
 				{userInfo && (
 					<div className="text-xs md:text-lg">
-						<p>Membership ID: {userInfo.destinyMemberships[0].membershipId}</p>
-						<p>Membership Type: {userInfo.destinyMemberships[0].membershipType}</p>
-						<p>Display Name: {userInfo.destinyMemberships[0].LastSeenDisplayName}</p>
+						<p><span className="font-bold">Membership ID:</span> {userInfo.destinyMemberships[0].membershipId}</p>
+						<p><span className="font-bold">Membership Type:</span> {userInfo.destinyMemberships[0].membershipType}</p>
+						<p><span className="font-bold">Display Name:</span> {userInfo.destinyMemberships[0].LastSeenDisplayName}</p>
 					</div>
 				)}
 			</div>
