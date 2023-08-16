@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { GetTokens } from "../API/Auth/GetTokens";
 import { GetUserInfo } from "../API/Auth/GetUserInfo";
-import { addLoading, removeLoading } from "../Hooks/setLoading";
+import { removeLoading } from "../Hooks/setLoading";
+import { getLocalData, setLocalData } from "../Hooks/localData";
 
 const Home = () => {
 	const [userInfo, setUserInfo] = useState(null);
-	const isLoggedin = localStorage.getItem("isLoggedIn");
+	const isLoggedin = localStorage.getItem("Logged");
 
 	const urlParams = new URLSearchParams(window.location.search);
 	const code = urlParams.get("code");
@@ -13,10 +14,13 @@ const Home = () => {
 	if (code) {
 		GetTokens(code)
 			.then((response) => {
-				if (response.access_token && response.refresh_token) {
-					localStorage.setItem("access_token", response.access_token);
-					localStorage.setItem("refresh_token", response.refresh_token);
-					localStorage.setItem("isLoggedIn", true);
+				if (response) {
+					setLocalData("Auth", {
+						"Membership ID": response.membership_id,
+						"Access Token": { "Access Token": response.access_token, "Expires In": response.expires_in },
+						"Refresh Token": { "Refresh Token": response.refresh_token, "Refresh Expires In": response.refresh_expires_in },
+					});
+					localStorage.setItem("Logged", true);
 					window.location.href = window.location.origin + window.location.pathname;
 				}
 			})
@@ -27,7 +31,6 @@ const Home = () => {
 
 	useEffect(() => {
 		const fetchUserInfo = async (accessToken) => {
-			addLoading();
 			try {
 				const userInfo = await GetUserInfo(accessToken);
 
@@ -42,7 +45,7 @@ const Home = () => {
 		};
 
 		if (isLoggedin == "true") {
-			fetchUserInfo(localStorage.getItem("access_token"));
+			fetchUserInfo(getLocalData("Auth")["Access Token"]["Access Token"]);
 		}
 	}, []);
 
