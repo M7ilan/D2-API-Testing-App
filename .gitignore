@@ -2,3 +2,5 @@ package-lock.json
 node_modules
 TEST
 .env
+project_structure.txt
+.gitignore
