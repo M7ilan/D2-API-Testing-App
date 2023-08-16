@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { GetTokens } from "../API/Auth/GetTokens";
 import { GetUserInfo } from "../API/Auth/GetUserInfo";
+import { removeLoading } from "../Hooks/setLoading";
+import { getLocalData, setLocalData } from "../Hooks/localData";
 
 const Home = () => {
 	const [userInfo, setUserInfo] = useState(null);
+	const isLoggedin = localStorage.getItem("Logged");
 
 	const urlParams = new URLSearchParams(window.location.search);
 	const code = urlParams.get("code");
@@ -11,10 +14,13 @@ const Home = () => {
 	if (code) {
 		GetTokens(code)
 			.then((response) => {
-				if (response.access_token && response.refresh_token) {
-					localStorage.setItem("access_token", response.access_token);
-					localStorage.setItem("refresh_token", response.refresh_token);
-					localStorage.setItem("isLoggedIn", true);
+				if (response) {
+					setLocalData("Auth", {
+						"Membership ID": response.membership_id,
+						"Access Token": { "Access Token": response.access_token, "Expires In": response.expires_in },
+						"Refresh Token": { "Refresh Token": response.refresh_token, "Refresh Expires In": response.refresh_expires_in },
+					});
+					localStorage.setItem("Logged", true);
 					window.location.href = window.location.origin + window.location.pathname;
 				}
 			})
@@ -33,23 +39,31 @@ const Home = () => {
 				}
 			} catch (error) {
 				console.error("Error fetching user info:", error);
+			} finally {
+				removeLoading();
 			}
 		};
 
-		if (localStorage.getItem("isLoggedIn") == "true") {
-			fetchUserInfo(localStorage.getItem("access_token"));
+		if (isLoggedin == "true") {
+			fetchUserInfo(getLocalData("Auth")["Access Token"]["Access Token"]);
 		}
 	}, []);
 
 	return (
 		<>
-			<div className="flex flex-col p-4 text-center gap-4">
-				<div className="text-4xl font-bold">Welcome {userInfo?.bungieNetUser.uniqueName}</div>
+			<div className={`flex flex-col items-center text-center ${isLoggedin == "true" && "md:text-start md:items-start"} p-4 gap-4`}>
+				<div className="text-2xl md:text-4xl font-bold">Welcome {userInfo?.bungieNetUser.uniqueName}</div>
 				{userInfo && (
-					<div className="text-lg">
-						<p>Membership ID: {userInfo.destinyMemberships[0].membershipId}</p>
-						<p>Membership Type: {userInfo.destinyMemberships[0].membershipType}</p>
-						<p>Display Name: {userInfo.destinyMemberships[0].LastSeenDisplayName}</p>
+					<div className="text-xs md:text-lg">
+						<p>
+							<span className="font-bold">Membership ID:</span> {userInfo.destinyMemberships[0].membershipId}
+						</p>
+						<p>
+							<span className="font-bold">Membership Type:</span> {userInfo.destinyMemberships[0].membershipType}
+						</p>
+						<p>
+							<span className="font-bold">Display Name:</span> {userInfo.destinyMemberships[0].LastSeenDisplayName}
+						</p>
 					</div>
 				)}
 			</div>
