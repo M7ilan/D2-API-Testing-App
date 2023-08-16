@@ -21,3 +21,7 @@ img {
 .btn-hover {
   @apply hover:bg-OpenColor-gray-3 rounded-lg px-4 py-2 my-2;
 }
+
+.loading-hidden {
+  @apply opacity-0;
+}

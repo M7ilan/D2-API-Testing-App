@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { GetTokens } from "../API/Auth/GetTokens";
 import { GetUserInfo } from "../API/Auth/GetUserInfo";
+import { addLoading, removeLoading } from "../Hooks/setLoading";
 
 const Home = () => {
 	const [userInfo, setUserInfo] = useState(null);
@@ -26,6 +27,7 @@ const Home = () => {
 
 	useEffect(() => {
 		const fetchUserInfo = async (accessToken) => {
+			addLoading();
 			try {
 				const userInfo = await GetUserInfo(accessToken);
 
@@ -34,6 +36,8 @@ const Home = () => {
 				}
 			} catch (error) {
 				console.error("Error fetching user info:", error);
+			} finally {
+				removeLoading();
 			}
 		};
 
@@ -48,9 +52,15 @@ const Home = () => {
 				<div className="text-2xl md:text-4xl font-bold">Welcome {userInfo?.bungieNetUser.uniqueName}</div>
 				{userInfo && (
 					<div className="text-xs md:text-lg">
-						<p><span className="font-bold">Membership ID:</span> {userInfo.destinyMemberships[0].membershipId}</p>
-						<p><span className="font-bold">Membership Type:</span> {userInfo.destinyMemberships[0].membershipType}</p>
-						<p><span className="font-bold">Display Name:</span> {userInfo.destinyMemberships[0].LastSeenDisplayName}</p>
+						<p>
+							<span className="font-bold">Membership ID:</span> {userInfo.destinyMemberships[0].membershipId}
+						</p>
+						<p>
+							<span className="font-bold">Membership Type:</span> {userInfo.destinyMemberships[0].membershipType}
+						</p>
+						<p>
+							<span className="font-bold">Display Name:</span> {userInfo.destinyMemberships[0].LastSeenDisplayName}
+						</p>
 					</div>
 				)}
 			</div>

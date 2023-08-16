@@ -10,6 +10,11 @@ export default function App() {
 			<header>
 				<NavBar />
 			</header>
+			<div id="loading-section">
+				<div id="loading" className="absolute opacity-100 flex bg-OpenColor-gray-0 w-full h-[calc(100vh-72px)] items-center justify-center text-4xl font-bold" style={{ transition: "opacity 300ms" }}>
+					Loading...
+				</div>
+			</div>
 			<main className="container mx-auto px-8 mt-16">
 				<Routes>
 					<Route path="/D2-API-Testing-App" element={<Home />} />
