@@ -3,6 +3,7 @@ import { removeLoading } from "../Hooks/setLoading";
 import { SearchByGlobalNamePrefix } from "../API/Endpoints/SearchByGlobalNamePrefix";
 import { motion } from "framer-motion";
 import { DestinyIcon, LoadingIcon } from "../Components/Icons/index";
+import { Link } from "react-router-dom";
 
 const Search = () => {
 	const [userInput, setUserInput] = useState("");
@@ -59,12 +60,12 @@ const Search = () => {
 					{searchResult?.searchResults?.map((result, index) => {
 						return (
 							<motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }} key={index} className="grid grid-cols-12 duration-0">
-								<div className="col-span-12 flex items-center bg-white rounded-lg hover:shadow-lg cursor-pointer overflow-hidden">
+								<Link to={`/D2-API-Testing-App/player/${result.destinyMemberships[0].membershipType}/${result.destinyMemberships[0].membershipId}`} className="col-span-12 flex items-center bg-white rounded-lg hover:shadow-lg cursor-pointer overflow-hidden">
 									<div className="flex items-center justify-center bg-current h-full p-2">{result.destinyMemberships?.[0]?.iconPath ? <img className="w-6 h-6 bg-cover" src={`https://www.bungie.net${result.destinyMemberships?.[0]?.iconPath}`} alt="Membership Icon" /> : <DestinyIcon />}</div>
 									<div className="text-xl font-bold px-4 py-2 flex-1">
 										{result.bungieGlobalDisplayName}#{result.bungieGlobalDisplayNameCode}
 									</div>
-								</div>
+								</Link>
 							</motion.div>
 						);
 					})}

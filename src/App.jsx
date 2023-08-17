@@ -7,6 +7,7 @@ import Search from "./Pages/Search";
 import Login from "./Pages/Login";
 import ErrorPage from "./Pages/ErrorPage";
 import LoadingIcon from "./Components/Icons/LoadingIcon";
+import PlayerProfile from "./Components/PlayerProfile";
 
 export default function App() {
 	const [oldLocation, setOldLocation] = useState(window.location.pathname);
@@ -48,6 +49,7 @@ export default function App() {
 					<Route path="/D2-API-Testing-App" element={<Home />} />
 					<Route path="/D2-API-Testing-App/Home" element={<Navigate to="/D2-API-Testing-App" />} />
 					<Route path="/D2-API-Testing-App/Search" element={<Search />} />
+					<Route path="/D2-API-Testing-App/player/:playerType/:playerId" element={<PlayerProfile />} />
 					<Route path="/D2-API-Testing-App/Login" element={localStorage.getItem("Logged") == "true" ? <Navigate to="/D2-API-Testing-App" /> : <Login />} />
 					<Route path="*" element={<ErrorPage />} />
 				</Routes>
