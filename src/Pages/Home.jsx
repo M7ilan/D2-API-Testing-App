@@ -51,19 +51,19 @@ const Home = () => {
 
 	return (
 		<>
-			<div className={`flex flex-col items-center text-center ${isLoggedin == "true" && "md:text-start md:items-start"} p-4 gap-4`}>
+			<div className={`flex col-span-12 flex-col items-center text-center ${isLoggedin == "true" && "md:text-start md:items-start"} p-4 gap-4`}>
 				<div className="text-2xl md:text-4xl font-bold">Welcome {userInfo?.bungieNetUser.uniqueName}</div>
 				{userInfo && (
 					<div className="text-xs md:text-lg">
-						<p>
+						<div>
 							<span className="font-bold">Membership ID:</span> {userInfo.destinyMemberships[0].membershipId}
-						</p>
-						<p>
+						</div>
+						<div>
 							<span className="font-bold">Membership Type:</span> {userInfo.destinyMemberships[0].membershipType}
-						</p>
-						<p>
+						</div>
+						<div>
 							<span className="font-bold">Display Name:</span> {userInfo.destinyMemberships[0].LastSeenDisplayName}
-						</p>
+						</div>
 					</div>
 				)}
 			</div>

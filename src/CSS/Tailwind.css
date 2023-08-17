@@ -15,11 +15,11 @@ img {
 }
 
 .btn {
-  @apply bg-OpenColor-gray-2 hover:bg-OpenColor-gray-3 rounded-lg px-4 py-2 my-2;
+  @apply bg-OpenColor-gray-2 hover:bg-OpenColor-gray-3 rounded-lg px-4 py-2 my-2 cursor-pointer select-none;
 }
 
 .btn-hover {
-  @apply hover:bg-OpenColor-gray-3 rounded-lg px-4 py-2 my-2;
+  @apply hover:bg-OpenColor-gray-3 rounded-lg px-4 py-2 my-2 cursor-pointer;
 }
 
 .loading-hidden {
