@@ -37,14 +37,8 @@ const Search = () => {
 		<>
 			<div className="col-span-8 col-start-3 space-y-4">
 				<div className="flex justify-center text-4xl font-bold">Search</div>
-				<div className="flex gap-2 items-center">
+				<form className="flex gap-2 items-center" onSubmit={(e) => handleSearch(e)}>
 					<input
-						onSubmit={(e) => handleSearch(e)}
-						onKeyDown={(e) => {
-							if (e.key === "Enter") {
-								handleSearch(e);
-							}
-						}}
 						placeholder="Search for a player..."
 						onChange={(e) => {
 							setUserInput(e.target.value);
@@ -52,12 +46,7 @@ const Search = () => {
 						className="flex-1 focus:shadow-lg border-2 rounded-lg px-4 py-2"
 						type="text"
 					/>
-					<button className="bg-OpenColor-gray-7 p-2 rounded-lg flex justify-center text-white" onClick={(e) => handleSearch(e)}>
-						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-							<path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
-						</svg>
-					</button>
-				</div>
+				</form>
 				{searchResult?.searchResults?.length > 0 && <hr />}
 				{isLoading && (
 					<div className="flex justify-center">
