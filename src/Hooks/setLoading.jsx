@@ -2,16 +2,20 @@ import LoadingIcon from "../Components/Icons/LoadingIcon";
 import { createRoot } from "react-dom/client";
 
 export const removeLoading = () => {
-	const loading = document.getElementById("loading");
-	if (loading) {
-		loading.classList.add("loading-hidden");
-		setTimeout(() => {
-			loading.remove();
-		}, 300);
-	}
+	setTimeout(() => {
+		console.log("removeLoading");
+		const loading = document.getElementById("loading");
+		if (loading) {
+			loading.classList.add("loading-hidden");
+			setTimeout(() => {
+				loading.remove();
+			}, 300);
+		}
+	}, 1);
 };
 
 export const addLoading = () => {
+	console.log("addLoading");
 	if (document.getElementById("loading")) {
 		return;
 	}
