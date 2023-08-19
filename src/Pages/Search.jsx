@@ -30,13 +30,26 @@ const Search = () => {
 	};
 
 	useEffect(() => {
+		window.addEventListener("load", () => {
+			removeLoading();
+		});
 		removeLoading();
 	}, []);
 
 	return (
 		<>
 			<div className="col-span-8 col-start-3 space-y-4">
-				<div className="flex justify-center text-4xl font-bold">Search</div>
+				<div className="flex flex-col text-center justify-center">
+					<div className="text-4xl font-bold">Search</div>
+					{localStorage.getItem("Logged") == "false" && (
+						<div className="text-sm italic">
+							to view someone's CV you need to{" "}
+							<Link className="underline" to={"/D2-API-Testing-App/Login"}>
+								Login
+							</Link>
+						</div>
+					)}
+				</div>
 				<form className="flex gap-2 items-center" onSubmit={(e) => handleSearch(e)}>
 					<input
 						placeholder="Search for a player..."
@@ -57,8 +70,8 @@ const Search = () => {
 					{searchResult?.searchResults?.map((result, index) => {
 						return (
 							<motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.1 }} key={index} className="grid grid-cols-12 duration-0">
-								<Link to={`/D2-API-Testing-App/player/${result?.destinyMemberships[0]?.membershipType}/${result?.destinyMemberships[0]?.membershipId}`} className="col-span-12 flex items-center bg-white rounded-lg hover:shadow-lg cursor-pointer overflow-hidden">
-									<div className="flex items-center justify-center bg-current h-full p-2">{result.destinyMemberships?.[0]?.iconPath ? <img className="w-6 h-6 bg-cover" src={`https://www.bungie.net${result.destinyMemberships?.[0]?.iconPath}`} alt="Membership Icon" /> : <DestinyIcon />}</div>
+								<Link to={localStorage.getItem("Logged") == "true" && `/D2-API-Testing-App/Player/${result?.destinyMemberships[0]?.membershipType}/${result?.destinyMemberships[0]?.membershipId}`} className="col-span-12 flex items-center bg-white rounded-lg hover:shadow-lg cursor-pointer overflow-hidden">
+									<div className="flex items-center justify-center bg-current h-full p-2">{result.destinyMemberships?.[0]?.iconPath ? <img className="w-6 h-6 object-contain" src={`https://www.bungie.net${result.destinyMemberships?.[0]?.iconPath}`} alt="Membership Icon" /> : <DestinyIcon />}</div>
 									<div className="text-xl font-bold px-4 py-2 flex-1">
 										{result.bungieGlobalDisplayName}#{result.bungieGlobalDisplayNameCode}
 									</div>
