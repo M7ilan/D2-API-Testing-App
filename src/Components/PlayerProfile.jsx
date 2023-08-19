@@ -28,13 +28,13 @@ const PlayerProfile = () => {
 
 	return (
 		<>
-			<div className="grid col-span-12 space-y-4">
-				<div className="text-6xl font-bold">{playerData?.Response?.bungieNetUser?.uniqueName}</div>
-				<div>
-					<div className="text-xl">
+			<div className="flex flex-col col-span-12 space-y-4 items-center text-center md:text-start md:items-start">
+				<div className="text-4xl md:text-6xl font-bold">{playerData?.Response?.bungieNetUser?.uniqueName}</div>
+				<div className="text-base md:text-2xl">
+					<div>
 						<span className="font-bold">Lifetime Score:</span> {playerRecords?.Response?.profileRecords?.data?.lifetimeScore}
 					</div>
-					<div className="text-xl">
+					<div>
 						<span className="font-bold">Active Score:</span> {playerRecords?.Response?.profileRecords?.data?.activeScore}
 					</div>
 				</div>
