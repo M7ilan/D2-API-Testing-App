@@ -10,28 +10,16 @@ import LoadingIcon from "./Components/Icons/LoadingIcon";
 import PlayerProfile from "./Components/PlayerProfile";
 
 export default function App() {
-	const [oldLocation, setOldLocation] = useState(window.location.pathname);
-	const whitelistedPaths = useState(["/D2-API-Testing-App/Search"]);
-
-	if (localStorage.getItem("Logged") !== "true") {
-		window.addEventListener("load", () => {
-			removeLoading();
-		});
-	}
-
 	const location = useLocation();
+	const [oldLocation, setOldLocation] = useState(window.location.pathname);
+
 	useEffect(() => {
 		if (location.pathname == oldLocation) {
 			return;
 		}
 		setOldLocation(location.pathname);
-		if (!whitelistedPaths[0].includes(location.pathname)) {
-			addLoading();
-		}
+		addLoading();
 
-		if (localStorage.getItem("Logged") !== "true") {
-			removeLoading();
-		}
 	}, [location]);
 
 	return (
@@ -49,7 +37,7 @@ export default function App() {
 					<Route path="/D2-API-Testing-App" element={<Home />} />
 					<Route path="/D2-API-Testing-App/Home" element={<Navigate to="/D2-API-Testing-App" />} />
 					<Route path="/D2-API-Testing-App/Search" element={<Search />} />
-					<Route path="/D2-API-Testing-App/player/:playerType/:playerId" element={<PlayerProfile />} />
+					<Route path="/D2-API-Testing-App/Player/:playerType/:playerId" element={<PlayerProfile />} />
 					<Route path="/D2-API-Testing-App/Login" element={localStorage.getItem("Logged") == "true" ? <Navigate to="/D2-API-Testing-App" /> : <Login />} />
 					<Route path="*" element={<ErrorPage />} />
 				</Routes>

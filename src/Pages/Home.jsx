@@ -16,11 +16,10 @@ const Home = () => {
 			.then((response) => {
 				if (response) {
 					setLocalData("Auth", {
-						"Membership ID": response.membership_id,
 						"Access Token": { "Access Token": response.access_token, "Expires In": response.expires_in },
 						"Refresh Token": { "Refresh Token": response.refresh_token, "Refresh Expires In": response.refresh_expires_in },
 					});
-					localStorage.setItem("Logged", true);
+					localStorage.setItem("Logged", "true");
 					window.location.href = window.location.origin + window.location.pathname;
 				}
 			})
@@ -36,6 +35,7 @@ const Home = () => {
 
 				if (userInfo.Response) {
 					setUserInfo(userInfo.Response);
+					setLocalData("Auth", { "Membership ID": userInfo.Response.destinyMemberships[0].membershipId });
 				}
 			} catch (error) {
 				console.error("Error fetching user info:", error);
@@ -46,6 +46,11 @@ const Home = () => {
 
 		if (isLoggedin == "true") {
 			fetchUserInfo(getLocalData("Auth")["Access Token"]["Access Token"]);
+		} else {
+			window.addEventListener("load", () => {
+				removeLoading();
+			});
+			removeLoading();
 		}
 	}, []);
 
